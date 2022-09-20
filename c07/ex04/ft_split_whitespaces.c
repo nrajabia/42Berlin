@@ -3,29 +3,39 @@
 
 char **ft_split_whitespaces(char *str)
 {
-	char *address;
 	int counter;
-	int flag;
+	int array[10][10];
+	int first_dim;
+	int second_dim;
 
-	counter = 0;
-	while(str[counter] != '\0')
+	first_dim = 0;
+	counter = -1;
+	while (str[counter] != '\0')
 	{
-		if (str[counter] != " "
-			&& str[counter] != "	"
-			&& str[counter] != "\n")
+		counter++;
+		second_dim = 0;
+		while(str[counter] != 32
+			&& str[counter] != 9
+			&& str[counter] != 10)
 		{
-			address = &str[counter + 1];
-			address++;
-		}
-		else
+			array[first_dim][second_dim] = str[counter];
 			counter++;
+			second_dim++;
+		}
+		array[first_dim][second_dim] = '\0';
+		first_dim++;
 	}
-	address
+	
+	for(int j = 0; j < sizeof(**array); j++)
+		for(int i = 0; i < sizeof(*array[j]); i++)
+			printf("%c\n", array[j][i]);
+	return(0);
 }
 
 int main()
 {
-	for(int i = 0; i < 3; i++)
-		printf("%s", ft_split_whitespaces("hello world	\n I am Neda."))
+	ft_split_whitespaces("hello world	I am Neda.");
+//	for(int i = 0; i < 5; i++)
+//		printf("%s\n", ft_split_whitespaces("hello world	I am Neda.")[i]);
 	return(0);
 }

@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+char **ft_split_whitespaces(char *str)
+{
+	char *ptr;
+	char *address;
+	char **ptr_add;
+	int counter;
+
+	counter = 0;
+	while(str[counter] != '\0')
+	{
+		if (str[counter] == ' '
+			|| str[counter] == '	'
+			|| str[counter] == '\n')
+		{
+			address = &str[counter + 1];
+			address++;
+			counter++;
+		}
+		else
+			counter++;
+	}
+	ptr = malloc(sizeof(sizeof(address));
+	ptr = address;
+	ptr_add = &ptr;
+	return (ptr_add);
+}
+
+int main()
+{
+	for(int i = 0; i < 3; i++)
+		printf("%s\n", ft_split_whitespaces("hello world	I am Neda.")[i]);
+	return(0);
+}

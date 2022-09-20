@@ -9,17 +9,22 @@ int **ft_ultimate_range(int **range, int min, int max)
         int counter;
 
         counter = 0;
-        len = max - min;
-        while(counter < len)
-        {
-                num[counter] = min;
-                counter++;
-                min++;
-        }
-        ptr = (int *)(malloc(sizeof(int) * len));
-        ptr = num;
-	range = &ptr;
-        return(range);
+	if(max > min)
+	{
+		len = max - min;
+		while(counter < len)
+		{
+			num[counter] = min;
+			counter++;
+			min++;
+		}
+		ptr = (int *)(malloc(sizeof(int) * len));
+		ptr = num;
+		range = &ptr;
+        	return(range);
+	}
+	else
+		return (0);
 }
 
 int main()

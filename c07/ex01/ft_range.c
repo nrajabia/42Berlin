@@ -9,22 +9,28 @@ int *ft_range(int min, int max)
 	int counter;
 
 	counter = 0;
-	len = max - min;
-	while(counter < len)
+	if (max > min)
 	{
-		num[counter] = min;
-		counter++;
-		min++;
+		len = max - min;
+		while(counter < len)
+		{
+			num[counter] = min;
+			counter++;
+			min++;
+		} 
+		ptr = (int *)(malloc(sizeof(int) * len));
+		ptr = num;
+		return(ptr);
 	}
-	ptr = (int *)(malloc(sizeof(int) * len));
-	ptr = num;
-	return(ptr);
+	else
+		return (NULL);
 }
 
 int main()
 {
-	int i;
-	for(i = 0; i < 8; i++)
-		printf("%d\n", ft_range(10, 18)[i]);
+	ft_range(18, 10);
+/**	int i;
+	for(i = 0; i < sizeof(ft_range(18, 10)); i++)
+		printf("%d\n", ft_range(18, 10)[i]);*/
 	return(0);
 }
