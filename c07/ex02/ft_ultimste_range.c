@@ -3,28 +3,28 @@
 
 int **ft_ultimate_range(int **range, int min, int max)
 {
-        int num[max - min];
-        int *ptr;
+        int *array;
         int len;
         int counter;
 
-        counter = 0;
-	if(max > min)
-	{
-		len = max - min;
-		while(counter < len)
-		{
-			num[counter] = min;
-			counter++;
-			min++;
-		}
-		ptr = (int *)(malloc(sizeof(int) * len));
-		ptr = num;
-		range = &ptr;
-        	return(range);
-	}
-	else
-		return (0);
+        len = max - min;
+        array = malloc(sizeof(int) * len);
+        if (!array)
+                return(0);
+        if (min >= max)
+        {
+                array = NULL;
+                return (0);
+        }
+        else
+        {
+                array[0] = min;
+                counter = 0;
+                while (++counter < len)
+                        array[counter] = ++min;
+		range = &array;
+                return (range);
+        }
 }
 
 int main()

@@ -3,34 +3,33 @@
 
 int *ft_range(int min, int max)
 {
-	int num[max - min];
-	int *ptr;
+	int *range;
 	int len;
 	int counter;
 
-	counter = 0;
-	if (max > min)
+	len = max - min;
+	range = malloc(sizeof(int) * len);
+	if (!range)
+		return(0);
+	if (min >= max)
 	{
-		len = max - min;
-		while(counter < len)
-		{
-			num[counter] = min;
-			counter++;
-			min++;
-		} 
-		ptr = (int *)(malloc(sizeof(int) * len));
-		ptr = num;
-		return(ptr);
+		range = NULL;
+		return (0);
 	}
 	else
-		return (NULL);
+	{
+		range[0] = min;
+		counter = 0;
+		while (++counter < len)
+			range[counter] = ++min;
+		return (range);
+	}
 }
 
 int main()
 {
-	ft_range(18, 10);
-/**	int i;
-	for(i = 0; i < sizeof(ft_range(18, 10)); i++)
-		printf("%d\n", ft_range(18, 10)[i]);*/
+	int i;
+	for(i = 0; i < sizeof(ft_range(10, 18)); i++)
+		printf("%d\n", ft_range(10, 18)[i]);
 	return(0);
 }
