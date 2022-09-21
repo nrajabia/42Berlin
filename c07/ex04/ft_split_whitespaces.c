@@ -3,41 +3,34 @@
 
 char **ft_split_whitespaces(char *str)
 {
+	char **address;
 	int counter;
-	char *array;
-	int first_dim;
-	int second_dim;
-
-	array = (char *)malloc(sizeof(char) * sizeof(str));
-	if(!ptr)
-		return(-1);
-	counter = 0;
-	first_dim = 0;
-	second_dim = 1;
-	ptr[0][0] = str[counter]; 
-	while (str[counter++] != '\0')
+	char *ptr[10];
+	int f_dim;
+	int s_dim;
+	
+	for(int i = 0; i < 10; i++)
+		ptr[i] = (char *)malloc(sizeof(char) * 10);
+	counter = -1;
+	f_dim = 0;
+	s_dim = 0;
+	while (str[++counter] != '\0')
 	{
-		while(str[counter] != 32
-			&& str[counter] != 9
-			&& str[counter] != 10)
+		if(str[counter] == 32
+			&& str[counter] == 9
+			&& str[counter] == 10)
 		{
-			ptr[first_dim][second_dim] = str[counter];
-			counter++;
-			second_dim++;
+			ptr[f_dim][s_dim] = '\0';
+			f_dim++;
+			s_dim = 0;
 		}
-		ptr[first_dim][second_dim] = '\0';
-		first_dim++;
-		second_dim = 0;
+		else
+		{
+			ptr[f_dim][s_dim] = str[counter];
+			s_dim++;
+		}
 	}
-	ptr[first_dim][second_dim] = '0';
-	array = &ptr;
-	return (array);
-}
-
-int main()
-{
-//	ft_split_whitespaces("hello world	I am Neda.");
-	for(int i = 0; i < 5; i++)
-		printf("%s\n", ft_split_whitespaces("hello world	I am Neda.")[i]);
-	return(0);
+	ptr[f_dim + 1][0] = '0';
+	address = ptr;
+	return (address);
 }
