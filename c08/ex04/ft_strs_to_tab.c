@@ -2,6 +2,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
 int ft_length(char *av)
 {
 	int size;
@@ -31,7 +33,11 @@ struct s_stock_str *ft_strs_to_tab(int ac, char **av)
 			param[count].size = ft_length(av[count]);
 			param[count].str = av[count];
 			param[count].copy = param[count].str;
+			count++;
 		}
+		param[count].size = 0;
+                param[count].str = NULL;
+                param[count].copy = NULL;
 	}
 	return(param);
 }
@@ -46,14 +52,17 @@ void ft_putstr(char *str)
 void ft_show_tab(struct s_stock_str *ptr)
 {
 	int count;
-	printf("%c\n", (ptr[0].size + 48));
-	count = -1;
-	/*while (++count < sizeof(ptr))
+	char num;
+
+	count = 0;
+	while (ptr[count].size != 0)
 	{
-		ft_putstr(ptr[count].size);
+		num = ptr[count].size + 48;
+		ft_putstr(&num);
 		ft_putstr(ptr[count].str);
 		ft_putstr(ptr[count].copy);
-	}*/
+		count++;
+	}
 }
 
 int main(int ac, char **av)
