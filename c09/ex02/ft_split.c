@@ -1,48 +1,59 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-int ft_strlen(char *str)
+int ft_len(char*str)
 {
 	int counter;
+	int i;
 
 	counter = 0;
-	while (str[counter] != '\0')
+	i = -1;
+	while(str[++i] != '\0')
 		counter++;
-	return (counter);
+	return(counter);
 }
+
 char **ft_split(char *str, char *charset)
 {
 	char **ptr;
-	int str_count;
-	int charset_count;
+	int strnum;
+	int strnum_copy;
+	int charnum;
+	int i;
 
-	str_count = 0;
-	ptr = malloc(sizeof(char*) * 5);
-	for (int j = 0; j < 5; j++)
-		ptr[j] = malloc(sizeof(char) * 5);
-	if(!ptr)
-		return(0);
-	while (str[str_count] != '\0')
+	strnum = 0;
+	strnum_copy = 0;
+	charnum = 0;
+	i = 0;
+	ptr = (char **)malloc((ft_len(str) + 1) * sizeof(char *));
+	if(!str || !charset ||!ptr)
+		return NULL;
+	while(str[++strnum] != '\0')
 	{
-		charset_count = 0;
-		while (charset[charset_count] != '\0')
+		ptr[i] = &str[strnum_copy]; 
+		if(str[strnum] != charset[charnum])
+			strnum++;
+		else
 		{
-			if(str[str_count] == charset[charset_count])
+			while(charset[charnum++] != '\0')
 			{
-				ptr[str_count] = '\0';
-				str_count++;
+				if(charset[charnum] != str[strnum])
+				{
+					strnum -= charnum;
+					continue;
+				}
+				strnum++;
 			}
-			charset_count++;
+			charnum = 0;
+			strnum_copy = strnum;
+			i++;
 		}
-		ptr[str_count] = str[str_count];
-		str_count++;
 	}
 	return (ptr);
 }
 
 int main()
 {
-	for (int i = 0; i<6; i++)
-		printf("%s\n", ft_split("hello world it is neda.", " ")[i]);
+	//for (int i = 0; i<6; i++)
+		printf("%u \n", ft_split("hello world it is neda.", " ")[0][0]);
 	return (0);
 }
